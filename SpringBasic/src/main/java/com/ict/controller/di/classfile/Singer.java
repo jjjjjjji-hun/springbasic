@@ -1,5 +1,8 @@
 package com.ict.controller.di.classfile;
 
+import org.springframework.stereotype.Component;
+
+//@Component
 public class Singer {
 
 	// 가수는 무대가 있건 없건 노래를 할 수 있기 떄문에
@@ -7,4 +10,5 @@ public class Singer {
 	public void sing() {
 		System.out.println("가수가 노래를 합니다.");
 	}
+	
 }
