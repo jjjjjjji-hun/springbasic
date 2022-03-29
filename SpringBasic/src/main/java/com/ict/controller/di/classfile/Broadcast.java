@@ -6,18 +6,17 @@ import org.springframework.stereotype.Component;
 @Component
 public class Broadcast {
 
+	//Stageì— ì˜ì¡´í•˜ë„ë¡ ì„¤ì •
 	@Autowired
 	private Stage stage;
 	
-	public Broadcast() {
-		
-	}
 	public Broadcast(Stage stage) {
 		this.stage = stage;
 	}
-
+	
 	public void onAir() {
-		System.out.print("¹æ¼Û ¼ÛÃâÁßÀÎ ");
-		this.stage.perform();
+		System.out.print("ë°©ì†¡ ì†¡ì¶œì¤‘ì¸ ");
+		stage.perform();
 	}
+	
 }
