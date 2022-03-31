@@ -1,0 +1,21 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+	<h2>현재 ${page}페이지를 보고 계십니다.</h2>
+	<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut ac aliquet lorem, et laoreet augue. Donec vehicula auctor arcu, in facilisis arcu efficitur nec. Vestibulum semper dictum odio id tincidunt. In vitae dui turpis. Nulla ultrices quis arcu sit amet luctus. Nam finibus, ex nec laoreet tincidunt, erat lorem tempus arcu, in viverra dolor eros commodo lectus. Mauris semper sapien ac vehicula rutrum.
+
+Etiam nisl risus, consectetur non elit eget, dapibus venenatis tellus. Etiam scelerisque porttitor velit a pretium. Fusce pulvinar est in odio lacinia, vitae tristique ante viverra. Proin metus ligula, euismod nec eleifend a, dignissim tempus leo. Donec quam metus, semper sit amet molestie vitae, ultrices eu ex. Nam ipsum tellus, sagittis eu gravida ac, ornare gravida neque. Orci varius natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce gravida magna odio, vel bibendum ex elementum quis. Maecenas luctus sem congue lobortis placerat. Duis faucibus ac ligula eget iaculis.
+
+Fusce libero nisl, eleifend vitae nulla vel, dignissim ornare urna. Etiam congue, tellus at aliquet pulvinar, tortor magna tempor ante, quis consequat enim dolor sit amet augue. Donec euismod metus eget urna egestas, in euismod purus ullamcorper. Donec vitae maximus libero. Integer non ante tristique neque pharetra cursus. Mauris tincidunt mi metus. Ut feugiat eros non sem varius, quis tincidunt mi luctus.
+
+Cras metus metus, aliquam vitae ullamcorper eget, euismod ut purus. Vivamus volutpat sit amet erat a sagittis. Mauris ipsum orci, congue ut tristique ut, ullamcorper nec dolor. Cras ac blandit arcu. Morbi interdum tincidunt feugiat. Aenean vehicula, turpis ut dapibus fringilla, arcu lectus luctus nibh, et vehicula nunc felis vitae quam. Curabitur volutpat non quam eu viverra. Praesent sed aliquet odio, sit amet consequat ex. Aliquam laoreet erat nec faucibus varius. Praesent facilisis accumsan libero, nec accumsan lorem lacinia sit amet. Sed euismod augue id eros feugiat venenatis. Mauris ac sagittis ante. Nam imperdiet convallis consectetur. Curabitur euismod urna vitae efficitur sodales.
+
+Sed id orci id enim dignissim rutrum sit amet vel tortor. Ut nec turpis leo. In vehicula auctor tortor at facilisis. Phasellus sed lobortis justo. Quisque malesuada tortor at consectetur blandit. Integer accumsan tempus sem, et consectetur augue volutpat nec. Pellentesque felis enim, posuere sit amet dignissim id, interdum vel elit.</p>
+</body>
+</html>

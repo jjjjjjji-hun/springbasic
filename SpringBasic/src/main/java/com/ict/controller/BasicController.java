@@ -1,11 +1,18 @@
 package com.ict.controller;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
+
+import com.ict.controller.vo.UserVO;
 
 // 어노테이션 네 종류가 있었는데(@Component, @Repository, @Controller, @Service)
 // 컨트롤러를 만드는 경우이니 당연히 @Controller를 씁니다.
@@ -113,16 +120,81 @@ public class BasicController {
 	}
 	
 	@PostMapping(value="/score")
-	public String scoreResult(int math, int english, int language, int history, int computer, Model model) {
-		int total = (math + english + language + history + computer); //총점
+	public String scoreResult(int math, int english, int language, int history, @RequestParam("computer") int com, Model model) {
+		int total = (math + english + language + history + com); //총점
 		double avg = (total / 5.0); // 평균
 		model.addAttribute("math", math);
 		model.addAttribute("english", english);
 		model.addAttribute("language", language);
 		model.addAttribute("history", history);
-		model.addAttribute("computer", computer);
+		model.addAttribute("com", com);
 		model.addAttribute("total", total);
 		model.addAttribute("avg", avg);
 		return "scoreResult";
+	}
+	
+	// 주소는 /page로 하겠습니다.
+	// get방식 접속만 허용합니다.
+	// 메서드명은 임의로 만들어주세요.
+	// page.jsp로 연결됩니다.
+	@GetMapping(value="/page/{bookNum}/{pageNum}")
+	public String getPage(@PathVariable int pageNum, @PathVariable int bookNum, Model model) {
+		// page.jsp를 views폴더에 만들어주세요.
+		// 해당 페이지는 int pageNum을 받아서 바인딩합니다.
+		model.addAttribute("page", pageNum);
+		model.addAttribute("book", bookNum);
+		// page.jsp 본문에 현재 ${page}페이지를 보고 계십니다.
+		// 와 함께 입숨 더미데이터를 이용해 본문글을 채워주세요.
+		return "page";
+	}
+	
+	// 환율 계산기를 만들어보겠습니다.
+	// 단, 원화금액은 @PathVariable을 이용해 입력받습니다.
+	// 주소는 /rate입니다.
+	// get방식으로 처리해주세요.
+	// 원화를 입력받으면 rate.jsp에서 결과로 환전금액을 보여줍니다.
+	@GetMapping(value="/rate/{won}")
+	public String getWon(@PathVariable int won, Model model) {
+		final double D_RATE = 1220;
+		double result = won / D_RATE;
+		model.addAttribute("won",won);
+		model.addAttribute("D_RATE",D_RATE);
+		model.addAttribute("result",result);
+		return "rate";
+	}
+	
+	// 리스트를 받아서 처리하기
+	@GetMapping("/getList")
+	// 배열자료를 받을 시 @RequestParam 사용이 강제됩니다.
+	public String getList(@RequestParam("array") ArrayList<String> array, Model model) {
+		// 리스트 자료형의 경우 값은 이름으로 여러 데이터를 연달아 보내면 처리가능합니다.
+		model.addAttribute("array", array);
+		return "getList";
+	}
+	
+	// 만약 주소와 매칭된 메서드의 리턴자료형을 String이 아닌 void로 처리하는 경우는
+	// 저장주소.jsp로 바로 연결됩니다.(view파일(.jsp파일) 이름 지칭 불가)
+	// 주소와 파일명이 일치한다면 써주셔도 되지만 기본적으로는 String 쓰는걸 추천드립니다.
+	@GetMapping("/test") // test.jsp로 바로 연결됨
+	public void goTest() {
+		//내부 실행문 없음.
+	}
+	
+	// VO를 활용해 회원 데이터를 받는 컨트롤러를 만들어보겠습니다.
+	@PostMapping("/userInfo")
+	public String  getUserInfo(UserVO userVO, Model model) {
+		// 변수명은 userVO로 지정했으나, 실제로는 내부 멤버변수의 이름으로 데이터를 받습니다.
+
+		// 바인딩
+		model.addAttribute("userVO", userVO);
+		return "user";
+	}
+	
+	// userInfo 페이지를 만들어서 폼을 만들어
+	// 상단의 userInfo로 보내게 해주세요.
+	// 상단의 userInfo로직은 post방식만 허용, 폼 페이지는 get 방식만 허용
+	@GetMapping("/userInfo")
+	public void UserInfoForm() {
+		
 	}
 }
