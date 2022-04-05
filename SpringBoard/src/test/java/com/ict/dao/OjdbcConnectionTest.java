@@ -19,13 +19,14 @@ public class OjdbcConnectionTest {
 		}
 	}
 	
-@Test
-public void testConnection() {
-	
-	try(Connection con = DriverManager.getConnection("jdbc:oracle:thin:@localhost:1521/XEPDB1", "mytest", "mytest")){
-		log.info(con);
-	}catch(Exception e) {
-		fail(e.getMessage());
+	@Test
+	public void testConnection() {
+		
+		try(Connection con = DriverManager.getConnection("jdbc:oracle:thin:@localhost:1521/XEPDB1", "mytest", "mytest")){
+			log.info(con);
+			log.info("정상적으로 연결될 시 뜸");
+		}catch(Exception e) {
+			fail(e.getMessage());
+		}
 	}
-}
 }
