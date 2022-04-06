@@ -2,7 +2,7 @@ package com.ict.mapper;
 
 import java.util.List;
 
-import com.ict.vo.BoardVO;
+import com.ict.domain.BoardVO;
 
 public interface BoardMapper {
 
@@ -16,5 +16,12 @@ public interface BoardMapper {
 	// VO내부에 적혀있는 정보를 이용해 insert를 합니다.
     // BoardVO를 매개로 insert 정보를 전달받음.
 	public void insert(BoardVO vo);
+	
+	// select구문은 글 번호를 입력받아서 해당 글 하나에 대한 정보만 얻어올 예정이므로
+	// 리턴자료형은 글 하나를 담당할 수 있는 BoardVO로 해야합니다.
+	public BoardVO select(long bno);
+	
+	// delete구문은 글 번호를 입력받아서 해당 글 하나에 대한 정보를 삭제합니다.
+	public void delete(long bno);
 
 }

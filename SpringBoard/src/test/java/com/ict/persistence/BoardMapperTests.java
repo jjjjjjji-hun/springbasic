@@ -6,8 +6,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
+import com.ict.domain.BoardVO;
 import com.ict.mapper.BoardMapper;
-import com.ict.vo.BoardVO;
 
 import lombok.extern.log4j.Log4j;
 
@@ -31,12 +31,12 @@ public class BoardMapperTests {
 	}
 	
 	// insert를 실행할 테스트코드를 하단에 작성해보겠습니다.
-	@Test
+	//@Test
 	public void testInsert() {
 		// 글 입력을 위해서 BoardVO 타입을 매개로 사용합니다.
 		// 따라서 BoardVO를 만들어놓고 setter로 글제목, 글본문, 글쓴이 만 저장해둔 채로
 		// boardmapper.insert(vo);를 호출해서 실행여부를 확인하면 됩니다.
-		// 위 설명을 토대로 아래 vo에 6번글에 대한 제목, 본문, 글쓴이를 넣고 호출해주신 다음에
+		// 위 설명을 토대로 아래 vo에 제목, 본문, 글쓴이를 넣고 호출해주신 다음에
 		// 실제로 DB에 글이 들어갔는지 확인해주세요.
 		BoardVO vo = new BoardVO();
 		
@@ -46,5 +46,17 @@ public class BoardMapperTests {
 		vo.setWriter("새로넣는 글쓴이");
 		boardmapper.insert(vo);
 		log.info(boardmapper.getList());
+	}
+	
+	// 하나의 글만 select 할 테스트코드를 작성해보겠습니다.
+	//@Test
+	public void testGetSelect() {
+		boardmapper.select(5);
+	}
+	
+	// 하나의 글만 삭제하는 delete 테스트 코드를 작성해보겠습니다.
+	//@Test
+	public void testDelete() {
+		boardmapper.delete(3);
 	}
 }
