@@ -48,7 +48,7 @@ public class BoardMapperTests {
 		log.info(boardmapper.getList());
 	}
 	
-	// 하나의 글만 select 할 테스트코드를 작성해보겠습니다.
+	// 하나의 글만 select 할 테스트 코드를 작성해보겠습니다.
 	//@Test
 	public void testGetSelect() {
 		boardmapper.select(5);
@@ -58,5 +58,20 @@ public class BoardMapperTests {
 	//@Test
 	public void testDelete() {
 		boardmapper.delete(3);
+	}
+	
+	// 하나의 글만 수정하는 update 테스트 코드를 작성해보겠습니다.
+	//@Test
+	public void testUpdate() {
+		BoardVO board = new BoardVO();
+		board.setTitle("수정한 제목");
+		board.setContent("수정한 본문");
+		board.setBno(4);
+		boardmapper.update(board);
+	}
+	
+	//@Test
+	public void testUpdate2() {
+		boardmapper.update2("up2로 바꾼 제목", "up2로 바꾼본문", 2);
 	}
 }

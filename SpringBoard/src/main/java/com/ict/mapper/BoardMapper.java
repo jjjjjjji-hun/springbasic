@@ -2,6 +2,8 @@ package com.ict.mapper;
 
 import java.util.List;
 
+import org.apache.ibatis.annotations.Param;
+
 import com.ict.domain.BoardVO;
 
 public interface BoardMapper {
@@ -23,5 +25,13 @@ public interface BoardMapper {
 	
 	// delete구문은 글 번호를 입력받아서 해당 글 하나에 대한 정보를 삭제합니다.
 	public void delete(long bno);
+	
+	// 글 수정은 update 구문을 사용합니다.
+	// 전달변수가 title, content, bno 이므로 단일 자료가 아닌 묶음으로 전달합니다.
+	public void update(BoardVO vo);
+	
+	// vo안쓰고 데이터 전달하기
+	// 2개 이상의 파라미터를 따로따로 전달할대는 각 파라미터 왼쪽에 @Param("보낼명칭")을 붙여줍니다.
+	public void update2(@Param("title")String title, @Param("content")String content, @Param("bno")long bno);
 
 }

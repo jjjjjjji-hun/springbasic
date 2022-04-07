@@ -30,4 +30,14 @@
 	<delete id="delete">
 		 DELETE FROM board_tbl WHERE bno = #{bno}
 	</delete>
+	
+	<!-- where 조건식을 걸어 하나의 게시글만 수정하는 update 구문은 리턴자료가 없습니다. -->
+	<update id="update">
+		UPDATE board_tbl SET title = #{title}, content = #{content}, updatedate = SYSDATE WHERE bno = #{bno}
+	</update>
+	
+	
+	<update id="update2">
+		UPDATE board_tbl SET title = #{title}, content = #{content}, updatedate = SYSDATE WHERE bno = #{bno}
+	</update>
 </mapper>
