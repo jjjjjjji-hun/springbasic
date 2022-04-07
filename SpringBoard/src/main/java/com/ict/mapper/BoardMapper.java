@@ -32,6 +32,8 @@ public interface BoardMapper {
 	
 	// vo안쓰고 데이터 전달하기
 	// 2개 이상의 파라미터를 따로따로 전달할대는 각 파라미터 왼쪽에 @Param("보낼명칭")을 붙여줍니다.
-	public void update2(@Param("title")String title, @Param("content")String content, @Param("bno")long bno);
+	public void update2(@Param("title")String title, 
+						@Param("content")String content, 
+						@Param("bno")long bno);
 
 }

@@ -40,8 +40,8 @@ public class BoardController {
 	// /boardDetail 주소를 get방식으로 선언해주세요.
 	// 주소 뒤에 ?bno= 번호 형식으로 적힌 번호 글만 조회합니다.
 	
-	/* @PathVariable 사용 시
-	@GetMapping(value="/boardDetail/{bno}")
+	// @PathVariable 사용 시
+	/*@GetMapping(value="/boardDetail/{bno}")
 	public String boardDetail(@PathVariable long bno, Model model) {
 		BoardVO board = boardmapper.select(bno);
 		model.addAttribute("board", board);
