@@ -30,8 +30,8 @@ public class BoardController {
 	// /boardList 주소를 get방식으로 선언해주세요.
 	// 메서드 내부에서는 boardMapper의 .getList를 호출해 그 결과를 바인딩합니다.
 	@GetMapping(value="/boardList")
-	public String boardList(Model model) {
-		List<BoardVO> boardList = boardmapper.getList();
+	public String boardList(long pageNum, Model model) {
+		List<BoardVO> boardList = boardmapper.getList(pageNum);
 		log.info("넘어온 글 관련 정보 목록: " + boardList);
 		model.addAttribute("boardList", boardList);
 		return "boardList";
@@ -97,14 +97,12 @@ public class BoardController {
 	}
 	
 	// boardUpdateForm.jsp 에서 수정하기 버튼을 클릭 시 입력한 데이터를 받아와
-	// 수정한 데이터로 게시글을 표시해햐 합니다. 따라서 수정 쿼리문을 실행하고
-	// 그 데이터를 화면에 표시해줄 조회 쿼리문을 사용합니다.
-	// 리턴할 페이지는 boardDetail.jsp 입니다.
+	// 수정한 데이터로 게시글을 표시해햐 합니다. 폼에서 날려준 데이터를 토대로
+	// 해당 글의 내용이 수정되도록 만들어주시면 
+	// 리다이렉트 페이지는 boardDetail.jsp 입니다.
 	@PostMapping(value="/boardUpdate")
-	public String boardUpdate(BoardVO board, long bno, Model model) {
+	public String boardUpdate(BoardVO board, Model model) {
 		boardmapper.update(board);
-		BoardVO updateboard = boardmapper.select(bno);
-		model.addAttribute("board", updateboard);
-		return "boardDetail";
+		return "redirect:/boardDetail?bno=" + board.getBno();
 	}
 }
