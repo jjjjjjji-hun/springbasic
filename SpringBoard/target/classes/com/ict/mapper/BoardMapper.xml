@@ -14,9 +14,11 @@
 		<![CDATA[
 			SELECT * FROM
 				(SELECT /*+ INDEX_DESC(board_tbl pk_board) */
-				rownum rn, board_tbl.* FROM board_tbl WHERE rownum <= (#{pageNum}*10))
-					WHERE rn > ((#{pageNum}-1)*10)
+				rownum rn, board_tbl.* FROM board_tbl WHERE rownum <= #{page})
+					WHERE rn > #{pageStart}
 		]]>
+		<!--  getter는 #{} 내부에서 호출 가능함, get을 뺀 나머지 메서드명을 적어주면 됩니다.
+		getter로 가져오면 맨 앞글자는 무조건 소문자 -->
 	</select>
 	
 	<!-- 현재 insert는 BoardVO를 파라미터로 받고 있습니다.
@@ -46,4 +48,8 @@
 	<update id="update2">
 		UPDATE board_tbl SET title = #{title}, content = #{content}, updatedate = SYSDATE WHERE bno = #{bno}
 	</update>
+	
+	<select id="countPageNum" resultType="int">
+		SELECT COUNT(*) FROM board_tbl
+	</select>
 </mapper>

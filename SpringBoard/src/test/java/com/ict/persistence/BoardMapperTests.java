@@ -27,7 +27,7 @@ public class BoardMapperTests {
 	@Test
 	public void testGetList() {
 		log.info("리스트 가져오기");
-		log.info(boardmapper.getList(1));
+		log.info(boardmapper.getList());
 	}
 	
 	// insert를 실행할 테스트코드를 하단에 작성해보겠습니다.
