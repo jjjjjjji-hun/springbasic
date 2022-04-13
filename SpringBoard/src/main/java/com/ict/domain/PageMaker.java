@@ -14,7 +14,7 @@ public class PageMaker {
 	// displayPageNum을 선언합니다.
 	private int displayPageNum;
 	// Criteria에서 현재 조회중인 페이지 정보 + 한 페이지에 깔리는 글 수를 받아와야 합니다.
-	private Criteria cri;
+	private SearchCriteria cri;
 	// 필요한 모든 사항을 계산해주는 메서드
 	public void calcData() {
 		// 한 페이지 하단에 깔고싶은 버튼 개수
@@ -41,12 +41,10 @@ public class PageMaker {
 		// next는 여태까지 출력한 페이지에 속한 글 개수보다 DB내 전체 글이 더많은 경우에 활성화
 		this.next = endPage * cri.getNumber() >= totalBoard ? false : true;
 		
-	}// carcDate()
-	
+	}
+	// carcDate()
 	public void setTotalBoard(int totalBoard) {
 		this.totalBoard = totalBoard;
 		calcData(); // prev, next, endPage, startPage를 다 구해버림.
 	}
-
-	
 }
