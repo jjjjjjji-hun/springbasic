@@ -19,7 +19,7 @@
 			<div class="col-md-6">마지막 수정날짜 : ${board.updatedate}</div><br/><br/>
 		</div>
 			
-		<a href="/boardList" class="btn btn-success">게시글 목록</a>
+		<a href="/boardList?pageNum=${param.pageNum }&searchType=${param.searchType}&keyword=${param.keyword}" class="btn btn-success">게시글 목록</a>
 		
 		<form action="/boardUpdateForm" method="post">
 			<input type="hidden" value="${board.bno}" name="bno"/>

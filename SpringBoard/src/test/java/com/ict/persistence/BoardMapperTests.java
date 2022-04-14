@@ -7,6 +7,7 @@ import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 import com.ict.domain.BoardVO;
+import com.ict.domain.SearchCriteria;
 import com.ict.mapper.BoardMapper;
 
 import lombok.extern.log4j.Log4j;
@@ -24,7 +25,7 @@ public class BoardMapperTests {
 	
 	// 테스트용 메서드의 이름은 testGetList입니다.
 	// 테스트 코드가 실행될 수 있도록 만들어주세요.
-	@Test
+	//@Test
 	public void testGetList() {
 		log.info("리스트 가져오기");
 		log.info(boardmapper.getList());
@@ -73,5 +74,14 @@ public class BoardMapperTests {
 	//@Test
 	public void testUpdate2() {
 		boardmapper.update2("up2로 바꾼 제목", "up2로 바꾼본문", 2);
+	}
+	
+	// 검색어 검색조건 실행 제대로 되는지 여부 테스트
+	@Test
+	public void testSearchGetList() {
+		SearchCriteria cri = new SearchCriteria();
+		cri.setKeyword("테스트");
+		cri.setSearchType("t");
+		boardmapper.getList(cri);
 	}
 }

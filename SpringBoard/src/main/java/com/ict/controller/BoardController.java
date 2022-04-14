@@ -49,7 +49,7 @@ public class BoardController {
 		// 버튼 처리를 위해 추가로 페이지메이커 생성 및 세팅
 		PageMaker pageMaker = new PageMaker();
 		pageMaker.setCri(cri);//cri 입력
-		int countPage = boardservice.countPageNum();//131대신 실제로 DB내 글 개수를 가져옴
+		int countPage = boardservice.countPageNum(cri);//131대신 실제로 DB내 글 개수를 가져옴
 		pageMaker.setTotalBoard(countPage); // calcData()호출도 되면서 순식간에 prev, next,startPage, endPage 세팅
 		model.addAttribute("pageMaker", pageMaker);
 		return "boardList";

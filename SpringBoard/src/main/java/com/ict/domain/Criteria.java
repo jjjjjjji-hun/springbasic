@@ -13,7 +13,7 @@ public class Criteria {
 	public int getPageStart() {
 		return (this.pageNum -1) * number;
 	}
-	public int getPage() {
+	public int getPageEnd() {
 		return (this.pageNum) * 10;
 	}
 }

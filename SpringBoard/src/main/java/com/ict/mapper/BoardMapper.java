@@ -6,6 +6,7 @@ import org.apache.ibatis.annotations.Param;
 
 import com.ict.domain.BoardVO;
 import com.ict.domain.Criteria;
+import com.ict.domain.SearchCriteria;
 
 public interface BoardMapper {
 
@@ -14,7 +15,7 @@ public interface BoardMapper {
 	// (어노테이션으로 쿼리문을 작성하면 xml 파일에는 쿼리문을 작성하면 안됩니다.)
 	// 위와 같지만 이제는 쿼리문을 xml 파일에 작성하기 때문에 메서드는 이름과 용도에 따른 리턴자료형만 적습니다.
 	// 버튼 추가를 위해 pageNum 대신 Criteria를 활용합니다.
-	public List<BoardVO> getList(Criteria cri);
+	public List<BoardVO> getList(SearchCriteria cri);
 	
 	// insert구문 실행용으로 메서드를 선언합니다.
 	// VO내부에 적혀있는 정보를 이용해 insert를 합니다.
@@ -41,7 +42,7 @@ public interface BoardMapper {
 	// 전체 글 개수를 얻어오는 countPageNum를 선언합니다.
 	// 파라미터는 필요없습니다.
 	// 글 개수 => 정수 값을 조회하기 때문에 int 리턴입니다.
-	public int countPageNum();
+	public int countPageNum(SearchCriteria cri);
 	
 	
 }
