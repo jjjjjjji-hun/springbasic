@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.ict.domain.BoardVO;
 import com.ict.domain.PageMaker;
@@ -98,7 +99,10 @@ public class BoardController {
 	// 글 삭제 버튼은 detail페이지 하단에 form으로 만들어서 bno를 hidden으로 전달하는 
 	// submit 버튼을 생성해서 처리하게 해주세요.
 	@PostMapping(value="/boardDelete")
-	public String boardDelete(long bno, Model model) {
+	public String boardDelete(long bno, SearchCriteria cri, RedirectAttributes rttr) {
+		rttr.addAttribute("pageNum", cri.getPageNum());
+		rttr.addAttribute("searchType", cri.getSearchType());
+		rttr.addAttribute("keyword", cri.getKeyword());
 		boardservice.delete(bno);
 		return "redirect:/boardList";
 	}
@@ -119,8 +123,22 @@ public class BoardController {
 	// 해당 글의 내용이 수정되도록 만들어주시면 됩니다.
 	// 리다이렉트 페이지는 boardDetail.jsp 입니다.
 	@PostMapping(value="/boardUpdate")
-	public String boardUpdate(BoardVO board, Model model) {
+	public String boardUpdate(BoardVO board, SearchCriteria cri, RedirectAttributes rttr) {
+		log.info("수정로직입니다 : " + board);
+		log.info("검색어 : " + cri.getKeyword());
+		log.info("검색조건 : " + cri.getSearchType());
+		log.info("진입 페이지번호 : " + cri.getPageNum());
+		
+		// 리다이렉트시 주소창 뒤에 파라미터 쿼리스트링 형식으로 붙이기
+		// rttr.addAttribute("파라미터명", "전달자료")
+		// 호출되면 redirect 주소 뒤에 파라미터를 붙여줍니다.
+		// rttr.addFlashAttribute()는 넘어간 페이지에서 파라미터를
+		// 쓸 수 있도록 전달하는 것으로 둘의 역할이 다르니 주의해주세요.
+		rttr.addAttribute("pageNum", cri.getPageNum());
+		rttr.addAttribute("searchType", cri.getSearchType());
+		rttr.addAttribute("keyword", cri.getKeyword());
 		boardservice.update(board);
+		// redirect:주소?글번=getter
 		return "redirect:/boardDetail?bno=" + board.getBno();
 	}
 }
