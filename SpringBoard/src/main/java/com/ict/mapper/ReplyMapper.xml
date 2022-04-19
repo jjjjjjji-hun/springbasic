@@ -6,7 +6,7 @@
 <mapper namespace="com.ict.mapper.ReplyMapper">
 
 	<select id="getList" resultType="com.ict.domain.ReplyVO">
-		SELECT * FROM reply_tbl WHWEW bno = #{bno} ORDER BY rno DESC
+		SELECT * FROM reply_tbl WHERE bno = #{bno} ORDER BY rno DESC
 	</select>
 	
 	<insert id="create">

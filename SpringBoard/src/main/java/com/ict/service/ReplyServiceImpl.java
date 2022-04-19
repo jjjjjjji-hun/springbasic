@@ -3,10 +3,12 @@ package com.ict.service;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import com.ict.domain.ReplyVO;
 import com.ict.mapper.ReplyMapper;
 
+@Service
 public class ReplyServiceImpl implements ReplyService {
 
 	// 서비스는 mapper를 호출하기 때문에 mapper 생성
