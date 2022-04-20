@@ -8,6 +8,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
@@ -23,6 +24,7 @@ import lombok.extern.log4j.Log4j;
 // 컨트롤러가 컨트롤러 기능을 할 수 있도록 처리해주세요.
 @Controller
 @Log4j
+@RequestMapping("/board")
 public class BoardController {
 
 	// 컨트롤러는 Service만 호출하도록 구조를 바꿉니다.
@@ -53,7 +55,7 @@ public class BoardController {
 		int countPage = boardservice.countPageNum(cri);//131대신 실제로 DB내 글 개수를 가져옴
 		pageMaker.setTotalBoard(countPage); // calcData()호출도 되면서 순식간에 prev, next,startPage, endPage 세팅
 		model.addAttribute("pageMaker", pageMaker);
-		return "boardList";
+		return "board/boardList";
 	}
 	
 	// 글 하나만 조회할 수 있는 디테일 페이지인 boardDetail.jsp로 연결되는
@@ -73,7 +75,7 @@ public class BoardController {
 	public String boardDetail(long bno, Model model) {
 		BoardVO board = boardservice.select(bno);
 		model.addAttribute("board", board);
-		return "boardDetail";
+		return "board/boardDetail";
 	}
 	
 	// insert 페이지를 위한 form으로 연결되는 컨트롤러를 먼저 만들겠습니다.
@@ -81,7 +83,7 @@ public class BoardController {
 	// 홈 페이지의 이름은 boardForm.jsp입니다.
 	@GetMapping(value="/boardInsert")
 	public String boardForm() {
-		return "boardForm";
+		return "board/boardForm";
 	}
 	
 	// /boardInsert인데 post방식을 처리하는 메서드를 새로 만들어주세요.
@@ -91,7 +93,7 @@ public class BoardController {
 	@PostMapping(value="boardInsert")
 	public String boardInsert(BoardVO board, Model model) {
 		boardservice.insert(board);
-		return "redirect:/boardList";
+		return "redirect:/board/boardList";
 	}
 	
 	// 글 삭제 로직은 Post 방식으로 진행합니다.
@@ -104,7 +106,7 @@ public class BoardController {
 		rttr.addAttribute("searchType", cri.getSearchType());
 		rttr.addAttribute("keyword", cri.getKeyword());
 		boardservice.delete(bno);
-		return "redirect:/boardList";
+		return "redirect:/board/boardList";
 	}
 	
 	// /boardUpdate를 Post 방식으로 접속하는 form 연결 메서드를 만들겠습니다.
@@ -115,7 +117,7 @@ public class BoardController {
 	public String boardUpdateForm(long bno, Model model) {
 		BoardVO board = boardservice.select(bno);
 		model.addAttribute("board", board);
-		return "boardUpdateForm";
+		return "board/boardUpdateForm";
 	}
 	
 	// boardUpdateForm.jsp 에서 수정하기 버튼을 클릭 시 입력한 데이터를 받아와
@@ -139,6 +141,6 @@ public class BoardController {
 		rttr.addAttribute("keyword", cri.getKeyword());
 		boardservice.update(board);
 		// redirect:주소?글번=getter
-		return "redirect:/boardDetail?bno=" + board.getBno();
+		return "redirect:/board/boardDetail?bno=" + board.getBno();
 	}
 }
