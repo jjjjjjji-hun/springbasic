@@ -28,7 +28,7 @@ public class BoardMapperTests {
 	//@Test
 	public void testGetList() {
 		log.info("리스트 가져오기");
-		log.info(boardmapper.getList());
+		//log.info(boardmapper.getList());
 	}
 	
 	// insert를 실행할 테스트코드를 하단에 작성해보겠습니다.
@@ -46,7 +46,7 @@ public class BoardMapperTests {
 		vo.setContent("새로넣는 본문");
 		vo.setWriter("새로넣는 글쓴이");
 		boardmapper.insert(vo);
-		log.info(boardmapper.getList(1));
+		//log.info(boardmapper.getList(cri));
 	}
 	
 	// 하나의 글만 select 할 테스트 코드를 작성해보겠습니다.
