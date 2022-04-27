@@ -13,4 +13,6 @@ public class ReplyVO {
 	private String replyer;
 	private Date replyDate;
 	private Date updateDate;
+	// 댓글 번호 사용하려면 추가
+	//private Long rownum;
 }
