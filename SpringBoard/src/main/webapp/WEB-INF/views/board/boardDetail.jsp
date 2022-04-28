@@ -5,7 +5,7 @@
 <head>
 <style>
 	#modDiv{
-		width: 300px;
+		width: 450px;
 		height: 100px;
 		background-color: green;
 		position: absolute;
@@ -15,6 +15,9 @@
 		margin-left: -150px;
 		padding:10px;
 		z-index:1000;
+	}
+	#reply{
+	width: 430px;
 	}
 </style>
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
@@ -69,16 +72,20 @@
 	</div>
 	<hr/>
 	<!-- 댓글 작성 공간 -->
-	<h3>댓글 작성하기</h3>
-	<div>
-		<div>
-			댓글 글쓴이 <input type="text" name="replyer" id="newReplyWriter"/>
-		</div>
-		<div>
-			댓글 내용 <input type="text" name="reply" id="newReplyText"/>
-		</div>
-		<button id="replyAddBtn">댓글 추가</button>
-	</div>
+	<div class="row box-box-success">
+		<div class="box-header">
+			<h3 class="text-primary">댓글 작성하기</h3>
+		</div><!-- header -->
+				<div class="box-body">
+					<strong>댓글 글쓴이</strong>
+					<input type="text" name="replyer" id="newReplyWriter" placeholder="writer" class="form-control"/>
+					<strong>댓글 내용</strong>
+					<input type="text" name="reply" id="newReplyText" placeholder="content" class="form-control"/>
+				</div><!-- body -->
+				<div class="box-footer">
+					<button type="button" id="replyAddBtn" class="btn btn-success">댓글 추가</button>
+				</div><!-- footer -->
+	</div><!-- row -->
 	
 		<!-- 댓글 modal -->
 		<div id="modDiv" style="display:none;">
@@ -144,11 +151,12 @@
 					let timestamp = this.updateDate;
 					let date = new Date(timestamp);
 					let formattedTime = "게시일 : " + date.getFullYear()
-										+ "/" + (date.getMonth()+1)
-										+ "/" + date.getDate()
-										+ "/" + date.getHours()
-										+ "/" + date.getMinutes()
-										+ "/" + date.getSeconds()
+										+ "년" + (date.getMonth()+1)
+										+ "월" + date.getDate()
+										+ "일" + date.getHours()
+										+ "시" + date.getMinutes()
+										+ "분" + date.getSeconds()
+										+ "초"
 										
 					str += "<div class='replyLi' data-rno='" + this.rno + "'><strong>@"
 						// + this.rownum
@@ -171,7 +179,9 @@
 			// this는 button 입니다. button의 부모가 바로 .replyLi 입니다.
 			// 즉, 클릭한 버튼과 연계된 li 태그를 replytag 변수에 저장합니다.
 			var replytag = $(this).parent();
-			var replyContent = $(this).prev();
+			var replyContent = $(this).prev();//button의 직전 태그인 .reply의 내용을 가져오기
+			//var replyContent = $(this).siblings(".reply")//button의 형재 중 .reply의 내용을 가져오기
+			//var replyContent = $(this).parent().children(".reply")//부모 태그의 자식 중 .reply의 내용을 가져오기
 			// 4월 27일 수정 : this(button)의 부모(.replyLi)가 아닌
 			// 형제 태그 .reply의 내용을 대신 가져올 수 있도록
 			// 변수 replyContent를 선언해 거기에 저장해주세요.
