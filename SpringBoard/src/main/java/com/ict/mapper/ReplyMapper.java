@@ -19,4 +19,7 @@ public interface ReplyMapper {
 	// 작성한 댓글 삭제하기
 	// 댓글 삭제 시는 단일 댓글 하나만 삭제해야 하므로 댓글 번호를 받음.
 	public void delete(Long rno);
+	
+	// 댓글번호로 글번호 유추하기
+	public Long getBno(Long rno);
 }
