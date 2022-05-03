@@ -29,4 +29,8 @@ ORDER BY rownum DESC   각 게시물에 댓글 번호 부여시 -->
 	<select id="getBno" resultType="long">
 		SELECT bno FROM reply_tbl WHERE rno = #{rno}
 	</select>
+	
+	<delete id="deleteAllReplies">
+		DELETE FROM reply_tbl WHERE bno = #{bno}
+	</delete>
 </mapper>
