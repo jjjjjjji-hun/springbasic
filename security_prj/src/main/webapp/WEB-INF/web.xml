@@ -32,15 +32,15 @@
 		<url-pattern>/</url-pattern>
 	</servlet-mapping>
 	
-	<!-- 필터 설정 -->
-		<filter>
-			<filter-name>springSecurityFilterChain</filter-name>
-			<filter-calss>org.springframework.web.filter.DelegatingFilterProxy</filter-calss>
-		</filter>
-		<filter-mapping>
-			<filter-name>springSecurityFilterChain</filter-name>
-			<url-pattern>/*</url-pattern>
-		</filter-mapping>
+	<!-- 시큐리티를 위한 필터설정 -->
+	<filter>
+		<filter-name>springSecurityFilterChain</filter-name>
+		<filter-class>org.springframework.web.filter.DelegatingFilterProxy</filter-class>
+	</filter>	
+	<filter-mapping>
+		<filter-name>springSecurityFilterChain</filter-name>
+		<url-pattern>/*</url-pattern>
+	</filter-mapping>
 	
 	<!-- 한글 인코딩 설정 -->
 		<filter> 

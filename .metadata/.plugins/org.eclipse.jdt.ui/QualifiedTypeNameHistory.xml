@@ -58,5 +58,6 @@
     <fullyQualifiedTypeName name="org.springframework.beans.factory.annotation.Autowired"/>
     <fullyQualifiedTypeName name="org.junit.Test"/>
     <fullyQualifiedTypeName name="com.ict.mapper.BoardMapper"/>
+    <fullyQualifiedTypeName name="com.ict.mapper.ReplyMapper"/>
     <fullyQualifiedTypeName name="org.springframework.transaction.annotation.Transactional"/>
 </qualifiedTypeNameHistroy>
