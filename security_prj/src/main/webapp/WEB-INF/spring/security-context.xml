@@ -7,6 +7,7 @@
 	http://www.springframework.org/schema/beans
 	http://www.springframework.org/schema/beans/spring-beans.xsd">
 	<bean id="customAccessDenied" class="com.ict.security.CustomAccessDeniedHandler"/>
+	<bean id="customLoginSuccess" class="com.ict.security.CustomLoginSuccessHandler"/>
 	<security:http>
 		<!-- /secu/all 접속 시 모든 유저에게 접근 허용 -->
 		<security:intercept-url pattern="/secu/all" access="permitAll"/>
@@ -16,7 +17,10 @@
 		
 		<!-- /secu/admin은 admin에게만 접근 허용 -->
 		<security:intercept-url pattern="/secu/admin" access="hasRole('ROLE_ADMIN')"/>
-		<security:form-login/>
+		
+		<security:form-login login-page="/customLogin"
+			authentication-success-handler-ref="customLoginSuccess"/>
+		
 		<!-- <security:access-denied-handler error-page="/accessError"/> -->
 		<security:access-denied-handler ref="customAccessDenied"/>
 	</security:http>
