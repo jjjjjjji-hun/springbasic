@@ -38,7 +38,10 @@ public class CustomLoginSuccessHandler implements AuthenticationSuccessHandler{@
 		response.sendRedirect("/secu/member");
 		return;
 	}
-	
+	if(roleList.contains("ROLE_USER")) {
+		response.sendRedirect("/secu/all");
+		return;
+	}
 	response.sendRedirect("/");
 	}
 
