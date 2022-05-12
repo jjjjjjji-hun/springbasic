@@ -26,7 +26,7 @@ public class MemberTests {
 	@Autowired// DB접근 담당
 	private DataSource ds;
 	
-	//@Test
+	@Test
 	public void testCryptDefaultDB() {
 		String[] idList = {"user00", "member00", "admin00"};
 		
@@ -45,7 +45,7 @@ public class MemberTests {
 		}
 	}
 	
-	//@Test
+	@Test
 	public void testCryptCustomDB() {
 		try {
 			Connection con = ds.getConnection();
