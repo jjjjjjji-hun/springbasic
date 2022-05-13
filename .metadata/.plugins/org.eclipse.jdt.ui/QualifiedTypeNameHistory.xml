@@ -1,7 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <qualifiedTypeNameHistroy>
-    <fullyQualifiedTypeName name="java.util.ArrayList"/>
-    <fullyQualifiedTypeName name="com.ict.controller.vo.UserVO"/>
     <fullyQualifiedTypeName name="java.sql.DriverManager"/>
     <fullyQualifiedTypeName name="org.apache.commons.logging.Log"/>
     <fullyQualifiedTypeName name="java.lang.Exception"/>
@@ -26,7 +24,6 @@
     <fullyQualifiedTypeName name="org.aspectj.lang.annotation.Before"/>
     <fullyQualifiedTypeName name="com.ict.mapper.Sample1Mapper"/>
     <fullyQualifiedTypeName name="com.ict.mapper.Sample2Mapper"/>
-    <fullyQualifiedTypeName name="org.springframework.stereotype.Service"/>
     <fullyQualifiedTypeName name="com.ict.mapper.BoardMapper"/>
     <fullyQualifiedTypeName name="com.ict.mapper.ReplyMapper"/>
     <fullyQualifiedTypeName name="org.springframework.transaction.annotation.Transactional"/>
@@ -48,16 +45,19 @@
     <fullyQualifiedTypeName name="javax.sql.DataSource"/>
     <fullyQualifiedTypeName name="java.sql.Date"/>
     <fullyQualifiedTypeName name="java.util.List"/>
-    <fullyQualifiedTypeName name="com.ict.domain.AuthVO"/>
     <fullyQualifiedTypeName name="lombok.Data"/>
     <fullyQualifiedTypeName name="org.junit.Test"/>
     <fullyQualifiedTypeName name="lombok.extern.log4j.Log4j"/>
-    <fullyQualifiedTypeName name="org.springframework.beans.factory.annotation.Autowired"/>
-    <fullyQualifiedTypeName name="com.ict.mapper.MemberMapper"/>
     <fullyQualifiedTypeName name="org.springframework.security.core.userdetails.UserDetailsService"/>
     <fullyQualifiedTypeName name="org.springframework.security.core.userdetails.User"/>
     <fullyQualifiedTypeName name="java.util.stream.Collectors"/>
     <fullyQualifiedTypeName name="lombok.Getter"/>
-    <fullyQualifiedTypeName name="com.ict.domain.MemberVO"/>
     <fullyQualifiedTypeName name="com.ict.domain.CustomUser"/>
+    <fullyQualifiedTypeName name="java.util.ArrayList"/>
+    <fullyQualifiedTypeName name="com.ict.domain.AuthVO"/>
+    <fullyQualifiedTypeName name="com.ict.domain.MemberVO"/>
+    <fullyQualifiedTypeName name="org.springframework.stereotype.Service"/>
+    <fullyQualifiedTypeName name="com.ict.mapper.MemberMapper"/>
+    <fullyQualifiedTypeName name="org.springframework.beans.factory.annotation.Autowired"/>
+    <fullyQualifiedTypeName name="com.ict.service.SecurityService"/>
 </qualifiedTypeNameHistroy>
