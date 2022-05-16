@@ -11,8 +11,6 @@ C:\spring_1\.metadata\.plugins\org.eclipse.jst.jsp.core\jspsearch\249153682.inde
 \SpringBoard\src\main\java
 C:\spring_1\.metadata\.plugins\org.eclipse.jst.jsp.core\jspsearch\2051603047.index
 \prj_aop\src\main\java
-C:\spring_1\.metadata\.plugins\org.eclipse.jst.jsp.core\jspsearch\2296691707.index
-\SpringBoard\src\main\java
 C:\spring_1\.metadata\.plugins\org.eclipse.jst.jsp.core\jspsearch\3141517233.index
 \prj_security\src\main\java
 C:\spring_1\.metadata\.plugins\org.eclipse.jst.jsp.core\jspsearch\2315805806.index
