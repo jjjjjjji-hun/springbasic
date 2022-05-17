@@ -1,5 +1,8 @@
 package com.ict.domain;
 
+import lombok.Data;
+
+@Data
 public class AttachFileDTO {
 
 	private String fileName;

@@ -3,6 +3,25 @@
 <!DOCTYPE html>
 <html>
 <head>
+<style>
+	.uploadResult{
+	width:100%;
+	background-color: gray;
+	}
+	.uploadResult ul{
+	display : flex;
+	flex-flow : row;
+	justify-content : center;
+	align-items: center;
+	}
+	.uploadResult ul li{
+	list-style : none;
+	padding : 10px;
+	}
+	.uploadResult ul li img{
+	width : 20px;
+	}
+</style>
 <meta charset="UTF-8">
 <title>Insert title here</title>
 </head>
@@ -14,6 +33,11 @@
 		<input type="file" name="uploadFile" multiple>
 	</div>
 	
+	<div class="uploadResult">
+		<ul>
+			<!-- 업로드된 파일이 들어갈 자리 -->
+		</ul>
+	</div>
 	<button id="uploadBtn">Upload</button>
 	
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
@@ -37,6 +61,8 @@
 				return true;
 			}
 			
+			var cloneObj = $(".uploadDiv").clone();
+			
 			$("#uploadBtn").on("click", function(e){
 				let formData = new FormData();
 				let inputFile = $("input[name='uploadFile']");
@@ -58,11 +84,34 @@
 					contentType : false,
 					data : formData,
 					type : 'POST',
+					dataType : 'json',
 					success : function(result){
+						console.log(result);
+						
+						showUploadedFile(result);
+						// 업로드 성공 시 미리 복사해둔 .uploadDiv로 덮어씌워서 첨부파일이 없는 상태로 되돌리기
+						$(".uploadDiv").html(cloneObj.html())
 						alert("Uploaded");
 					}
 				});//ajax
-			});
+			});// onclick uploadBtn
+			
+			var uploadResult = $(".uploadResult ul");
+			
+			function showUploadedFile(uploadResultArr){
+				var str="";
+				
+				$(uploadResultArr).each(function(i, obj){
+					if(!obj.image){
+						str += "<li><img src='/resources/attach.jpg'>" 
+							+ obj.fileName + "</li>"
+					}else{
+						str += "<li>" + obj.fileName + "</li>"
+					}
+					
+				});
+				uploadResult.append(str);
+			}// showUploadedFile
 		});
 	</script>
 	
