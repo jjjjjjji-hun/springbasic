@@ -3,6 +3,8 @@ package com.ict.controller;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.io.UnsupportedEncodingException;
+import java.net.URLDecoder;
 import java.nio.file.Files;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -10,11 +12,14 @@ import java.util.Date;
 import java.util.List;
 import java.util.UUID;
 
+import org.springframework.core.io.FileSystemResource;
+import org.springframework.core.io.Resource;
+import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
+import org.springframework.util.FileCopyUtils;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -188,4 +193,78 @@ public class UploadController {
 		return new ResponseEntity<>(list, HttpStatus.OK);
 	}
 	
+	@GetMapping("/display")
+	@ResponseBody
+	public ResponseEntity<byte[]> getFile(String fileName){
+		log.info("fileName: " + fileName);
+		
+		// 1. 파일 생성
+		File file = new File("c:\\upload_data\\temp\\" + fileName);
+		
+		log.info("file : " + file);
+		
+		ResponseEntity<byte[]> result = null;
+		
+		try {
+			// 2. json대신 파일을 줘야하는데 http 방식 통신이므로 헤더 생성
+			HttpHeaders header = new HttpHeaders();
+			// 3. 컨텐츠 타입이 json이 아닌 파일임을 헤더에 명시
+			header.add("Content-Type", Files.probeContentType(file.toPath()));
+			// 4. ResponseEntity에 파일을 포함시켜서 전달
+			result = new ResponseEntity<>(FileCopyUtils.copyToByteArray(file), header, HttpStatus.OK);
+		}catch(IOException e) {
+			e.printStackTrace();
+		}
+		return result;
+	}
+	
+	@GetMapping(value="/download", produces = MediaType.APPLICATION_OCTET_STREAM_VALUE)
+	@ResponseBody
+	public ResponseEntity<Resource> downloadFile(String fileName){
+		log.info("download file : " + fileName);
+		
+		Resource resource = new FileSystemResource("C:\\upload_data\\temp\\" + fileName);
+		
+		log.info("resource : " + resource);
+		
+		String resourceName = resource.getFilename();
+		
+		HttpHeaders headers = new HttpHeaders();
+		
+		try {
+			headers.add("Content-Disposition", "attachment; filename=" + 
+							new String(resourceName.getBytes("UTF-8"),"ISO-8859-1"));
+		}catch(UnsupportedEncodingException e) {
+			e.printStackTrace();
+		}
+		return new ResponseEntity<Resource>(resource, headers, HttpStatus.OK);
+	}
+	
+	@PostMapping("/deleteFile")
+	@ResponseBody
+	public ResponseEntity<String> deleteFile(String fileName, String type){
+		log.info("deleteFile : " + fileName);
+		
+		File file = null;
+		
+		try {
+			file = new File("c:\\upload_data\\temp\\" + URLDecoder.decode(fileName, "UTF-8"));
+		
+			file.delete();
+			
+			if(type.equals("image")) {
+				String largeFileName = file.getAbsolutePath().replace("s_", "");
+				
+				log.info("largeFileName : " + largeFileName);
+				
+				file = new File(largeFileName);
+				
+				file.delete();
+			}
+		}catch(UnsupportedEncodingException e) {
+			e.printStackTrace();
+			return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+		}
+		return new ResponseEntity<String>("deleted", HttpStatus.OK);
+	}
 }
