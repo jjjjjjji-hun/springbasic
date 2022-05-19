@@ -119,7 +119,7 @@
 											+ "_" + obj.fileName);
 						var fileCallPathOriginal = encodeURIComponent(obj.uploadPath + "/"  + obj.uuid + "_" + obj.fileName);
 						str += "<li><a href='/download?fileName=" + fileCallPathOriginal
-								+"'>" + "<img arc='/display?fileName" + fileCallPath 
+								+"'>" + "<img src='/display?fileName=" + fileCallPath 
 								+ "'>" + obj.fileName + "</a>"
 								+ "<span data-file=\'" + fileCallPath + "\' data-type='image'> X </span>"
 								+ "</li>";

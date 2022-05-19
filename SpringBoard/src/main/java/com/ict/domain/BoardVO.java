@@ -2,6 +2,7 @@ package com.ict.domain;
 
 import java.sql.Date;
 import java.sql.Timestamp;
+import java.util.List;
 
 import lombok.Data;
 
@@ -17,4 +18,6 @@ public class BoardVO {
 	private Timestamp regdate; // 초 단위 까지 나오는 속성이며, Data와 비교하기 위해 쓴 것이므로 신경 쓰지 않아도 됩니다.
 	private Date updatedate;
 	private int replyCount;
+	
+	private List<BoardAttachVO> attachList;
 }
