@@ -19,6 +19,26 @@
 	#reply{
 	width: 430px;
 	}
+	/* uploadResult 결과물 css */
+	.uploadResult{
+	width:100%;
+	background-color: gray;
+	}
+	.uploadResult ul{
+	display : flex;
+	flex-flow : row;
+	justify-content : center;
+	align-items: center;
+	}
+	.uploadResult ul li{
+	list-style : none;
+	padding : 10px;
+	align-content :center;
+	text-align : center;
+	}
+	.uploadResult ul li img{
+	width : 30%;
+	}
 </style>
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
@@ -35,6 +55,15 @@
 		<div class="row">
 			<div class="col-md-6">쓴날짜 : ${board.regdate}&nbsp;&nbsp;&nbsp;</div>
 			<div class="col-md-6">마지막 수정날짜 : ${board.updatedate}</div><br/><br/>
+		</div>
+			
+		<div class="row">
+			<h3 class="text-primary">첨부파일</h3>
+			<div class="uploadResult">
+				<ul>
+					<!-- 첨부파일이 들어갈 위치 -->
+				</ul>
+			</div>
 		</div>
 			
 		<div class="row">
@@ -100,12 +129,15 @@
 			</div>
 		</div>
 	</div>
+	
 	<!-- jquery cdn -->
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 	
 	<!--  여기부터 댓글 비동기 처리 자바스크립트 처리 영역 -->
 	<script id="text/javascript">
 		let bno = ${board.bno};
+		$(document).ready(function(){
+			
 		$("#replyAddBtn").on("click", function(){
 			
 			// 폼이 없기때문에 input태그 내의 입력된 요소를 가져와야 합니다.
@@ -251,6 +283,49 @@
 				}
 			});
 		});
+		
+		(function(){
+			$.getJSON("/board/getAttachList", {bno : bno}, function(arr){
+				console.log(arr);
+				
+				var str = "";
+				
+				$(arr).each(function(i, obj){
+					// image type
+					if(!obj.fileType){
+						
+						var fileCallPath = encodeURIComponent(obj.uploadPath + "/" + obj.uuid + "_" + obj.fileName);
+						
+						str += "<li "
+							+ "data-path='" + obj.uploadPath + "' data-uuid='" + obj.uuid
+							+ "' data-filename='" + obj.fileName + "' data-type='" + obj.fileType
+							+ "'><a href='/download?fileName=" + fileCallPath
+							+ "'>" + "<img src='/resources/attach.jpg'>"
+							+ obj.fileName + "</a>"
+							+ "<span data-file=\'" + fileCallPath + "\' data-type='file'> X </span>"
+							+ "</li>";
+					}else{
+						//str += "<li>" + obj.fileName + "</li>"
+						// 수정 코드
+						var fileCallPath = encodeURIComponent(obj.uploadPath + "/s_" + obj.uuid + "_" + obj.fileName);
+						var fileCallPathOriginal = encodeURIComponent(obj.uploadPath + "/" + obj.uuid + "_" + obj.fileName);
+						
+						str += "<li "
+							+ "data-path='" + obj.uploadPath + "' data-uuid='" + obj.uuid
+							+ "' data-filename='" + obj.fileName + "' data-type='" + obj.fileType
+							+ "'><a href='/download?fileName=" + fileCallPathOriginal
+							+ "'>" + "<img src='/display?fileName=" + fileCallPath 
+							+ "'>" + obj.fileName + "</a>"
+							+ "<span data-file=\'" + fileCallPath + "\' data-type='image'> X </span>"
+							+ "</li>";
+						
+					}
+				});
+				$(".uploadResult ul").html(str);
+			}); // end getJSON
+		})(); // 익명함수 종료
+		
+	});//document
 	</script>
 </body>
 </html>

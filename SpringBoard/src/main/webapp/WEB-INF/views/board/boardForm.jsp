@@ -122,6 +122,7 @@
 					if(!obj.fileType){
 						
 						var fileCallPath = encodeURIComponent(obj.uploadPath + "/" + obj.uuid + "_" + obj.fileName);
+						
 						str += "<li "
 							+ "data-path='" + obj.uploadPath + "' data-uuid='" + obj.uuid
 							+ "' data-filename='" + obj.fileName + "' data-type='" + obj.fileType
@@ -135,6 +136,7 @@
 						// 수정 코드
 						var fileCallPath = encodeURIComponent(obj.uploadPath + "/s_" + obj.uuid + "_" + obj.fileName);
 						var fileCallPathOriginal = encodeURIComponent(obj.uploadPath + "/" + obj.uuid + "_" + obj.fileName);
+						
 						str += "<li "
 							+ "data-path='" + obj.uploadPath + "' data-uuid='" + obj.uuid
 							+ "' data-filename='" + obj.fileName + "' data-type='" + obj.fileType
@@ -171,21 +173,33 @@
 				})//ajax
 			});//click span
 			
-			// 제출 버튼 클릭 시, 첨부파일 정보를 폼에 추가해서 전달하는 코드
+			// 글쓰기 버튼 클릭 시, 첨부파일 정보를 폼에 추가해서 전달하는 코드
 			$("#submitBtn").on("click", function(e){
-				// 1. 제출버튼을 눌렀을때 바로 작동하지 않도록 기능 막기
+				// 1. 글쓰기버튼을 눌렀을때 바로 작동하지 않도록 기능 막기
 				e.preventDefault();
 				
 				// 2. var formObj = $("form"); 로 폼태그를 가져옵니다
 				var formObj = $("form");
+				
+				// formObj내부에 hidden 태그들을 순서대로 만들어줍니다.
+				var str="";
 				
 				// 3. 5월 19일 수업에서는 첨부파일 내에 들어있던 이미지 정보를 콘솔에 찍기만 하고 종료하고
 				// 내일 수업에 DB에 넣는부분까지 진행합니다.
 				$(".uploadResult ul li").each(function(i, obj){
 					var jobj = $(obj);
 					console.log(jobj);
-					
+					str += "<input type='hidden' name='attachList[" + i + "].fileName'"
+						+ " value='" + jobj.data("filename") + "'>"
+						+ "<input type='hidden' name='attachList[" + i + "].uuid'"
+						+ " value='" + jobj.data("uuid") + "'>"
+						+ "<input type='hidden' name='attachList[" + i + "].uploadPath'"
+						+ " value='" + jobj.data("path") + "'>"
+						+ "<input type='hidden' name='attachList[" + i + "].fileType'"
+						+ " value='" + jobj.data("type") + "'>"				
 				});
+				// 폼태그에 위의 str내부 태그를 추가해주는 명령어, .submit() 을 추가로 넣으면 제출 완료
+				formObj.append(str).submit();
 			});
 			
 		});// document

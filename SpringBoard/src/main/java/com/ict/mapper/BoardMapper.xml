@@ -64,7 +64,19 @@
 	${변수명} 이 아님에 주의해주세요. insert 구문이므로 insert태그를 쓰고 리턴자료가 없으니 resultType 작성 안합니다.
 	BoardVO를 받지만 #{vo.변수명}이라고 적지 않습니다. -->
 	<insert id="insert">
-		INSERT INTO board_tbl(bno, title, content, writer) VALUES (board_num.nextval, #{title}, #{content}, #{writer})
+	
+	<!-- bno는 board_num.nextval이 실행되기 전까지 몇 번인지 알 수 없으므로
+	미리 vo에 bno를 추가하기 위해서는 아래 INSERT 구문 실행 이전에 먼저 글번호가 몇번일지
+	조회하는 쿼리문이 실행되어야 함.
+	
+	실행 이전에 bno 값을 먼저 조회해서 bno변수명으로 저장
+	keyProperty에 변수명을, order에 BEFORE를 넣어서
+	insert 쿼리문 실행 이전에 조회한 bno 값을 bno라는 명칭에 저장 -->
+	<selectKey keyProperty="bno" order="BEFORE" resultType="long">
+		SELECT board_num.nextval from dual
+	</selectKey>
+	
+		INSERT INTO board_tbl(bno, title, content, writer) VALUES (#{bno}, #{title}, #{content}, #{writer})
 	</insert>
 	
 	<!-- where 조건식을 걸어 하나의 게시글만 조회하는 select 경우도 resultType을 보면 리스트와 똑같이 BoardVO를 넣어줌 -->

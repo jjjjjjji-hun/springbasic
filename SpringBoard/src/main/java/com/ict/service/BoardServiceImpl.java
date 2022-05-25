@@ -6,14 +6,19 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.ict.domain.BoardAttachVO;
 import com.ict.domain.BoardVO;
 import com.ict.domain.Criteria;
 import com.ict.domain.SearchCriteria;
+import com.ict.mapper.BoardAttachMapper;
 import com.ict.mapper.BoardMapper;
 import com.ict.mapper.ReplyMapper;
 
+import lombok.extern.log4j.Log4j;
+
 // BoardService 인터페이스 구현
 @Service // bean contianer 등록(root-context.xml에서 컴포넌트 스캔까지 완료해야 등록됨)
+@Log4j
 public class BoardServiceImpl implements BoardService{
 
 	// 서비스가 DAO(Mapper.java)를 호출한다면 선언을 하고 의존성주입을 해야합니다.
@@ -27,6 +32,9 @@ public class BoardServiceImpl implements BoardService{
 	// 글 삭제시 해당 글의 전체 댓글을 삭제하기 위해 reply_tbl 생성
 	@Autowired
 	private ReplyMapper replymapper;
+	
+	@Autowired
+	private BoardAttachMapper attachmapper;
 	
 	// 리턴자료형이 없는 insert, delete, update 구문은 사용자 행동 기준으로 메서드를 나눕니다.
 	// 리턴자료형이 있는 select 구문은 하나의 메서드가 하나의 쿼리문을 담당합니다.
@@ -45,9 +53,19 @@ public class BoardServiceImpl implements BoardService{
 		return boardmapper.select(bno);
 	}
 	
+	@Transactional
 	@Override
 	public void insert(BoardVO vo) {
+		log.info("이번에 새로 쓰는 글번호 : " + vo.getBno());
 		boardmapper.insert(vo);
+		if(vo.getAttachList() == null || vo.getAttachList().size()<=0) {
+			return;
+		}
+		
+		vo.getAttachList().forEach(attach -> {
+			attach.setBno(vo.getBno());
+			attachmapper.insert(attach);
+		});
 	}
 	
 	@Transactional
@@ -62,5 +80,10 @@ public class BoardServiceImpl implements BoardService{
 	@Override
 	public void update(BoardVO vo) {
 		boardmapper.update(vo);
+	}
+
+	@Override
+	public List<BoardAttachVO> getAttachList(Long bno) {
+		return attachmapper.findByBno(bno);
 	}
 }
