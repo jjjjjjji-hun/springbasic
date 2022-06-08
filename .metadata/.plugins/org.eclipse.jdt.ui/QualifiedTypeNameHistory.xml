@@ -1,9 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <qualifiedTypeNameHistroy>
-    <fullyQualifiedTypeName name="com.ict.mapper.Sample1Mapper"/>
-    <fullyQualifiedTypeName name="com.ict.mapper.Sample2Mapper"/>
-    <fullyQualifiedTypeName name="com.ict.mapper.BoardMapper"/>
-    <fullyQualifiedTypeName name="com.ict.mapper.ReplyMapper"/>
     <fullyQualifiedTypeName name="org.springframework.web.bind.annotation.RequestMapping"/>
     <fullyQualifiedTypeName name="com.ict.controller.SecurityController"/>
     <fullyQualifiedTypeName name="lombok.extern.log4j.Log4j2"/>
@@ -29,12 +25,9 @@
     <fullyQualifiedTypeName name="com.ict.domain.CustomUser"/>
     <fullyQualifiedTypeName name="com.ict.domain.AuthVO"/>
     <fullyQualifiedTypeName name="com.ict.domain.MemberVO"/>
-    <fullyQualifiedTypeName name="org.springframework.stereotype.Service"/>
     <fullyQualifiedTypeName name="com.ict.mapper.MemberMapper"/>
-    <fullyQualifiedTypeName name="org.springframework.beans.factory.annotation.Autowired"/>
     <fullyQualifiedTypeName name="com.ict.service.SecurityService"/>
     <fullyQualifiedTypeName name="java.text.SimpleDateFormat"/>
-    <fullyQualifiedTypeName name="java.util.Date"/>
     <fullyQualifiedTypeName name="java.util.UUID"/>
     <fullyQualifiedTypeName name="java.nio.file.Files"/>
     <fullyQualifiedTypeName name="java.io.IOException"/>
@@ -50,8 +43,6 @@
     <fullyQualifiedTypeName name="org.springframework.core.io.Resource"/>
     <fullyQualifiedTypeName name="java.io.UnsupportedEncodingException"/>
     <fullyQualifiedTypeName name="java.net.URLDecoder"/>
-    <fullyQualifiedTypeName name="lombok.Data"/>
-    <fullyQualifiedTypeName name="java.util.List"/>
     <fullyQualifiedTypeName name="com.ict.mapper.BoardAttachMapper"/>
     <fullyQualifiedTypeName name="org.springframework.transaction.annotation.Transactional"/>
     <fullyQualifiedTypeName name="lombok.extern.log4j.Log4j"/>
@@ -60,4 +51,13 @@
     <fullyQualifiedTypeName name="org.springframework.http.ResponseEntity"/>
     <fullyQualifiedTypeName name="com.ict.domain.BoardAttachVO"/>
     <fullyQualifiedTypeName name="org.springframework.http.MediaType"/>
+    <fullyQualifiedTypeName name="lombok.Data"/>
+    <fullyQualifiedTypeName name="java.util.Date"/>
+    <fullyQualifiedTypeName name="org.springframework.web.bind.annotation.RestController"/>
+    <fullyQualifiedTypeName name="java.util.List"/>
+    <fullyQualifiedTypeName name="org.springframework.stereotype.Service"/>
+    <fullyQualifiedTypeName name="org.springframework.beans.factory.annotation.Autowired"/>
+    <fullyQualifiedTypeName name="com.report.mapper.employeesMapper"/>
+    <fullyQualifiedTypeName name="com.report.service.employeesService"/>
+    <fullyQualifiedTypeName name="com.report.domain.employeesVO"/>
 </qualifiedTypeNameHistroy>
